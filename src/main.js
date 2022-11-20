@@ -13,14 +13,27 @@ const loading = () => {
 
   return inner;
 };
+const loading2 = () => {
+  const inner = document.createElement('p');
+  inner.className = 'error ';
+  inner.innerHTML = 'Algum erro ocorreu, recarregue a página e tente novamente';
+  product.appendChild(inner);
+
+  return inner;
+};
 const creatImg = async () => {
   loading();
-  const lista = await fetchProductsList('computador');
-  lista.forEach((element) => {
-    const criarElemento = createProductElement(element);
-    product.appendChild(criarElemento);
-  });
-  document.querySelector('.loading').remove();
+  try {
+    const lista = await fetchProductsList('computador');
+    lista.forEach((element) => {
+      const criarElemento = createProductElement(element);
+      product.appendChild(criarElemento);
+    });
+    document.querySelector('.loading').remove();
+  } catch (erro) {
+    return loading2();
+  }
 };
+
 creatImg();
 document.querySelector('.cep-button').addEventListener('click', searchCep);
