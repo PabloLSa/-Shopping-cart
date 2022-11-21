@@ -34,6 +34,5 @@ const creatImg = async () => {
     return loading2();
   }
 };
-
 creatImg();
 document.querySelector('.cep-button').addEventListener('click', searchCep);
